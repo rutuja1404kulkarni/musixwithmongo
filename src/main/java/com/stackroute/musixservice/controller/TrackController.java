@@ -30,7 +30,8 @@ public class TrackController  {
     {
         this.trackService = trackService;
     }
-
+	
+//api to add the track
     @PostMapping("/music")
     public ResponseEntity<Track> addMusic(@RequestBody Track track) {
         try {
@@ -47,6 +48,7 @@ public class TrackController  {
         return responseEntity;
     }
 
+//api to update the track
     @PutMapping("/music/{id}")
     public ResponseEntity<Track> updateMusic(@RequestBody Track track,@PathVariable int id) {
         try {
@@ -58,6 +60,7 @@ public class TrackController  {
         return responseEntity;
     }
 
+//api to get the track
     @GetMapping("/music")
     public ResponseEntity<List<Track>> getMusic() {
         ResponseEntity responseEntity;
@@ -80,6 +83,7 @@ public class TrackController  {
         return  responseEntity;
     }
 
+//api to delete the track
     @Value("$(delete.message)")
     private String deleteMessage;
     @DeleteMapping("/music/{id}")
@@ -94,23 +98,24 @@ public class TrackController  {
         }
         return responseEntity;
     }
+//api to get the track by id
+    @GetMapping("/music/{id}")
+   public ResponseEntity<Optional<Track>> getById(@PathVariable int id ) {
+       try {
+           // trackServiceImpl.findByTrackId(id);
+           return new ResponseEntity<Optional<Track>>(trackServiceImpl.findTrackById(id), HttpStatus.OK);
+       }catch (TrackNotFoundException e)
+       {
+           System.out.println(e.getMessage());
+       }
+       return responseEntity;
+   }
 
-//    @GetMapping("/music/{id}")
-//    public ResponseEntity<Optional<Track>> getById(@PathVariable int id ) {
-//        try {
-//            // trackServiceImpl.findByTrackId(id);
-//            return new ResponseEntity<Optional<Track>>(trackServiceImpl.findTrackById(id), HttpStatus.OK);
-//        }catch (TrackNotFoundException e)
-//        {
-//            System.out.println(e.getMessage());
-//        }
-//        return responseEntity;
-//    }
-
-//    @GetMapping(value ="track/{trackName}")
-//    public ResponseEntity<List<Track>> getTrackByName(@PathVariable("trackName") String trackName) throws Exception {
-//        List<Track> trackOne = trackService.getTrackByName(trackName);
-//        return new ResponseEntity<List<Track>>(trackOne, HttpStatus.OK);
-//    }
+//api to get the track by name
+   @GetMapping(value ="track/{trackName}")
+   public ResponseEntity<List<Track>> getTrackByName(@PathVariable("trackName") String trackName) throws Exception {
+       List<Track> trackOne = trackService.getTrackByName(trackName);
+       return new ResponseEntity<List<Track>>(trackOne, HttpStatus.OK);
+   }
 
 }

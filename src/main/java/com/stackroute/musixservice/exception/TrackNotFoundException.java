@@ -1,5 +1,6 @@
 package com.stackroute.musixservice.exception;
 
+//creating custom exception
 public class TrackNotFoundException extends Exception
 {
     private String message;
