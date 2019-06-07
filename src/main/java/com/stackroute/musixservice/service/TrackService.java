@@ -7,7 +7,7 @@ import com.stackroute.musixservice.model.Track;
 import java.util.List;
 
 import java.util.Optional;
-
+//Inteface for the service class
 public interface TrackService {
     public Track addMusic(Track track) throws TrackAlreadyExistsException;
 
@@ -16,6 +16,5 @@ public interface TrackService {
     public void deleteMusic(int track) throws TrackNotFoundException;
 
     public Optional<Track> findTrackById(int id) throws TrackNotFoundException;
-//    public List<Track> getTrackByName(String trackName) throws TrackNotFoundException;
 
 }
